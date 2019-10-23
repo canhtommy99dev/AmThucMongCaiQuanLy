@@ -1,0 +1,90 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtCreateBy1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Người tạo"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+    <TextView
+        android:id="@+id/txtDiachi1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Địa Chỉ:"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông Tin Cửa Hàng:"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+
+    <TextView
+        android:id="@+id/txttimeOpenEnd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="---OPEN END TIME"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/txtSDTMC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="---SĐT"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+    <TextView
+        android:id="@+id/txfFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Facebook :"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/txtDanhMuc2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh Mục:"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+    <TextView
+        android:id="@+id/txtTinhTrangShipDo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tình Trạng Ship:"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/Hinhanhquan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hình Ảnh Quán:"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"/>
+
+
+
+    <ImageView
+        android:id="@+id/imgClickAddImage"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        app:srcCompat="@drawable/btnaddimage" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
