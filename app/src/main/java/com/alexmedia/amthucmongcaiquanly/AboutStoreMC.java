@@ -1,6 +1,7 @@
 package com.alexmedia.amthucmongcaiquanly;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
@@ -8,7 +9,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,19 +31,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+
 public class AboutStoreMC extends AppCompatActivity {
 
     String tench,diachi,timeopen,sodt,fb,createby,danhmuc,ship,image;
+    String idc,image3;
     TextView danhmuc1,create1,diachifix,opentime1,sdt1,facebook1,tinhtrangship1;
-    ImageView imgCH;
+    ImageView imgCH,imgHienThiUpload,imgThemAnhToanBo;
     Button themhinhanh;
     Context context;
     Intent intent;
     DatabaseReference databaseReference;
     FloatingActionButton fab;
-    public static final String SODIENTHOAI = "thoigian";
-    public static final String FACEBOOK_CH = "facebook";
-    public static final String ADDRESS = "tench";
+    private Uri imgUri;
+    private static final int CHOOSE_IMAGE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +86,7 @@ public class AboutStoreMC extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(AboutStoreMC.this, "Get In", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AboutStoreMC.this, "ccc", Toast.LENGTH_SHORT).show();
             }
         });
         setTitle("Thông tin cửa hàng");
@@ -92,5 +98,34 @@ public class AboutStoreMC extends AppCompatActivity {
         danhmuc1.setText("Danh Mục: "+danhmuc);
         tinhtrangship1.setText("Tình Trạng Giao Hàng: " + ship);
         Picasso.with(context).load(image).into(imgCH);
+        imgHienThiUpload = findViewById(R.id.imgHienThiCacAnh);
+        themhinhanh = findViewById(R.id.btnChooseImage);
+        imgThemAnhToanBo = findViewById(R.id.imgUpload2);
+        themhinhanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowFile();
+            }
+        });
     }
+    private void ShowFile() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, CHOOSE_IMAGE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHOOSE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imgUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+                imgHienThiUpload.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
