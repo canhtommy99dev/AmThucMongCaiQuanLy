@@ -3,24 +3,34 @@ package com.alexmedia.amthucmongcaiquanly;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -29,14 +39,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AboutStoreMC extends AppCompatActivity {
 
     String tench,diachi,timeopen,sodt,fb,createby,danhmuc,ship,image;
-    String idc,image3;
+    String id,image3;
     TextView danhmuc1,create1,diachifix,opentime1,sdt1,facebook1,tinhtrangship1;
     ImageView imgCH,imgHienThiUpload,imgThemAnhToanBo;
     Button themhinhanh;
@@ -44,13 +61,21 @@ public class AboutStoreMC extends AppCompatActivity {
     Intent intent;
     DatabaseReference databaseReference;
     FloatingActionButton fab;
+    StorageReference anhmc;
     private Uri imgUri;
     private static final int CHOOSE_IMAGE = 1;
+    ProgressBar pgmc;
+    ProgressDialog dialog;
+    List<ModelImageCuaHANG> mc1;
+    AdapterImageCuaHang adapterImageCuaHang;
+    GridView lsview;
+    StorageTask mUploadTasks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_store_mc);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mc1 = new ArrayList<>();
         setSupportActionBar(toolbar);
         if (getSupportActionBar() !=null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -63,6 +88,7 @@ public class AboutStoreMC extends AppCompatActivity {
             }
         });
         intent = getIntent();
+        pgmc = findViewById(R.id.upLoadImag1e);
         tench = intent.getStringExtra(MainActivity.TENCH);
         diachi = intent.getStringExtra(MainActivity.ADDRESS);
         timeopen = intent.getStringExtra(MainActivity.TIMEOPENEND);
@@ -72,9 +98,10 @@ public class AboutStoreMC extends AppCompatActivity {
         danhmuc = intent.getStringExtra(MainActivity.DANHMUC);
         ship = intent.getStringExtra(MainActivity.SHIPTINHTRANG);
         image = intent.getStringExtra(MainActivity.IMAGE);
-        databaseReference = FirebaseDatabase.getInstance()
-                .getReference("CuaHang/DanhSachCuaHang").child(intent.getStringExtra(MainActivity.ID));
+        databaseReference = FirebaseDatabase.getInstance().getReference("ImageAlbum").child(intent.getStringExtra(MainActivity.ID));
+        anhmc = FirebaseStorage.getInstance().getReference("CuaHang/DanhSachCuaHangc");
         imgCH = findViewById(R.id.iv_detail);
+        dialog = new ProgressDialog(AboutStoreMC.this);
         create1 = findViewById(R.id.txtCreateBy1);
         danhmuc1 = findViewById(R.id.txtDanhMuc2);
         opentime1 = findViewById(R.id.txttimeOpenEnd2);
@@ -89,6 +116,7 @@ public class AboutStoreMC extends AppCompatActivity {
                 Toast.makeText(AboutStoreMC.this, "ccc", Toast.LENGTH_SHORT).show();
             }
         });
+        dialog.setTitle("Xin vui lòng chờ upload");
         setTitle("Thông tin cửa hàng");
         diachifix.setText("Địa Chỉ" + diachi);
         opentime1.setText("Time:" + timeopen);
@@ -105,6 +133,45 @@ public class AboutStoreMC extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ShowFile();
+            }
+        });
+        imgThemAnhToanBo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mUploadTasks != null && mUploadTasks.isInProgress()){
+                    Toast.makeText(AboutStoreMC.this, "Đang xử lý quá trình", Toast.LENGTH_SHORT).show();
+                }else {
+                    UploadImage();
+                }
+            }
+        });
+        lsview = findViewById(R.id.gridview);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //clearing the previous artist list
+                mc1.clear();
+
+                //iterating through all the nodes
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    //getting artist
+                    ModelImageCuaHANG artist = postSnapshot.getValue(ModelImageCuaHANG.class);
+                    //adding artist to the list
+                    mc1.add(artist);
+                }
+
+                //creating adapter
+                AdapterImageCuaHang artistAdapter = new AdapterImageCuaHang(getApplicationContext(),R.layout.layout_adapter_image, mc1);
+
+                //attaching adapter to the listview
+                lsview.setAdapter(artistAdapter);
+                artistAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
@@ -125,6 +192,55 @@ public class AboutStoreMC extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+    private void UploadImage(){
+        if (imgUri != null){
+            final StorageReference mc1 = anhmc.child(System.currentTimeMillis()+"."+ getFileExtension((imgUri)));
+            mc1.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            pgmc.setProgress(0);
+                        }
+                    },500);
+                    Toast.makeText(AboutStoreMC.this, "Updated Complete", Toast.LENGTH_SHORT).show();
+                    taskSnapshot.getUploadSessionUri().toString();
+                    mc1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            ModelImageCuaHANG modelImageCuaHANG = new ModelImageCuaHANG(id,image3);
+                            modelImageCuaHANG.setImagegoc(uri.toString());
+                            modelImageCuaHANG.setId(id);
+                            id = databaseReference.push().getKey();
+                            databaseReference.child(id).setValue(modelImageCuaHANG);
+                        }
+                    });
+
+                }
+                //atimeover
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AboutStoreMC.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                    double process = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    pgmc.setProgress((int) process);
+                }
+            });
+        }else {
+            Toast.makeText(this, "Not file update image", Toast.LENGTH_SHORT).show();
         }
     }
 

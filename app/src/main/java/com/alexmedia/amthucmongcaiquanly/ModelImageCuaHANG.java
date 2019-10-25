@@ -1,22 +1,22 @@
 package com.alexmedia.amthucmongcaiquanly;
 
 public class ModelImageCuaHANG {
-    String cid,imagegoc;
+    String id,imagegoc;
 
     public ModelImageCuaHANG() {
     }
 
     public ModelImageCuaHANG(String cid, String imagegoc) {
-        this.cid = cid;
+        this.id = cid;
         this.imagegoc = imagegoc;
     }
 
-    public String getCid() {
-        return cid;
+    public String getid() {
+        return id;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid;
+    public void setId(String cid) {
+        this.id = id;
     }
 
     public String getImagegoc() {
