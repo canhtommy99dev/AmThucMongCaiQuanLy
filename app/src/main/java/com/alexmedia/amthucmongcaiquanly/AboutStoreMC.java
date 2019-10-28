@@ -7,6 +7,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -50,7 +52,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutStoreMC extends AppCompatActivity {
+public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapter.ItemListener{
 
     String tench,diachi,timeopen,sodt,fb,createby,danhmuc,ship,image;
     String id,image3;
@@ -68,8 +70,9 @@ public class AboutStoreMC extends AppCompatActivity {
     ProgressDialog dialog;
     List<ModelImageCuaHANG> mc1;
     AdapterImageCuaHang adapterImageCuaHang;
-    GridView lsview;
     StorageTask mUploadTasks;
+    RecyclerView recycleViewAdapter;
+    ArrayList arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,35 +148,18 @@ public class AboutStoreMC extends AppCompatActivity {
                 }
             }
         });
-        lsview = findViewById(R.id.gridview);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //clearing the previous artist list
-                mc1.clear();
-
-                //iterating through all the nodes
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
-                    ModelImageCuaHANG artist = postSnapshot.getValue(ModelImageCuaHANG.class);
-                    //adding artist to the list
-                    mc1.add(artist);
-                }
-
-                //creating adapter
-                AdapterImageCuaHang artistAdapter = new AdapterImageCuaHang(getApplicationContext(),R.layout.layout_adapter_image, mc1);
-
-                //attaching adapter to the listview
-                lsview.setAdapter(artistAdapter);
-                artistAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        recycleViewAdapter = findViewById(R.id.recyclerView);
+        arrayList = new ArrayList();
+        arrayList.add(new DataModel("Item 1", R.drawable.ic_android_black_24dp, "#09A9FF"));
+        arrayList.add(new DataModel("Item 2", R.drawable.ic_android_black_24dp, "#3E51B1"));
+        arrayList.add(new DataModel("Item 3", R.drawable.ic_android_black_24dp, "#673BB7"));
+        arrayList.add(new DataModel("Item 4", R.drawable.ic_android_black_24dp, "#4BAA50"));
+        arrayList.add(new DataModel("Item 5", R.drawable.ic_android_black_24dp, "#F94336"));
+        arrayList.add(new DataModel("Item 6", R.drawable.ic_android_black_24dp, "#0A9B88"));
+        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        recycleViewAdapter.setLayoutManager(manager);
+        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 500);
+        recycleViewAdapter.setLayoutManager(layoutManager);
     }
     private void ShowFile() {
         Intent intent = new Intent();
@@ -244,4 +230,13 @@ public class AboutStoreMC extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onItemClick(DataModel item) {
+        Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

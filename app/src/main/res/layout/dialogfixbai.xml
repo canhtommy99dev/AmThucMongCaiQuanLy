@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edtTenCuaHang1"
+            android:id="@+id/edtTenCuaHang12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -18,7 +18,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edtDiachi1"
+            android:id="@+id/edtDiachi12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -26,7 +26,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edtTimeOpen1"
+            android:id="@+id/edtTimeOpen12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +34,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edtTimeClose1"
+            android:id="@+id/edtTimeClose12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -42,7 +42,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edtSoDienThoai1"
+            android:id="@+id/edtSoDienThoai12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -57,7 +57,7 @@
             android:text="Chọn tình trạng" />
 
         <Spinner
-            android:id="@+id/spnChonShip1"
+            android:id="@+id/spnChonShip12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -69,12 +69,12 @@
             android:text="Danh Mục" />
 
         <Spinner
-            android:id="@+id/spnChonDanhMuc1"
+            android:id="@+id/spnChonDanhMuc12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/edtFacebook1"
+            android:id="@+id/edtFacebook12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -82,7 +82,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edtNgayDang1"
+            android:id="@+id/edtNgayDang12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -90,49 +90,28 @@
             android:inputType="textPersonName" />
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnChonHinhAnh1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Chọn Hình Ảnh" />
-
-            <ImageView
-                android:id="@+id/imgHienThi1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_image_black_24dp" />
-        </LinearLayout>
-
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Chọn Vị Trí" />
 
         <EditText
-            android:id="@+id/edtlatitude1"
+            android:id="@+id/edtlatitude12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="latitude"
-            android:inputType="" />
+            android:inputType="numberDecimal"/>
 
         <EditText
-            android:id="@+id/edtlongitude1"
+            android:id="@+id/edtlongitude12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="longitude"
-            android:inputType="" />
+            android:inputType="numberDecimal"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

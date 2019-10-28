@@ -16,6 +16,7 @@ public class AdapterImageCuaHang extends BaseAdapter {
     Context mcontext;
     int myLayout1;
     List<ModelImageCuaHANG> modelImageCuaHANGS;
+    private OnItemClickListener mListenr;
 
     public AdapterImageCuaHang(Context mcontext, int myLayout1, List<ModelImageCuaHANG> modelImageCuaHANGS) {
         this.mcontext = mcontext;
@@ -38,8 +39,15 @@ public class AdapterImageCuaHang extends BaseAdapter {
         return 0;
     }
 
-    private class ViewHolder{
+    private class ViewHolder implements View.OnClickListener{
         ImageView chimaage;
+
+        @Override
+        public void onClick(View v) {
+            if (mListenr != null){
+
+            }
+        }
     }
 
     @Override
@@ -55,5 +63,13 @@ public class AdapterImageCuaHang extends BaseAdapter {
         }
         Picasso.with(mcontext).load(modelImageCuaHANGS.get(position).imagegoc).into(viewHolder.chimaage);
         return rowview;
+    }
+    public interface OnItemClickListener{
+        void onItemClick(int postion);
+        void onWhatEverClick(int postion);
+        void onDeleteClick(int postion);
+    }
+    public void setOnClickListener(OnItemClickListener listener){
+        mListenr = listener;
     }
 }

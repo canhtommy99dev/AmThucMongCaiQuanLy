@@ -47,6 +47,8 @@ public class DangNhapFB extends AppCompatActivity {
         imgIntro.startAnimation(aniFad);
         emailE = findViewById(R.id.edtEmail);
         passE = findViewById(R.id.edtPassword);
+        emailE.setText("mongcai@gmail.com");
+        passE.setText("mongcai123");
         firebaseAuth = FirebaseAuth.getInstance();
         imClick = findViewById(R.id.imgClickLogin);
         imClick.setOnClickListener(new View.OnClickListener() {
