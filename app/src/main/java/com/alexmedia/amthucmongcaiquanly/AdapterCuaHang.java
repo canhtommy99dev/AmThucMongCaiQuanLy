@@ -7,7 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -43,6 +43,7 @@ public class AdapterCuaHang extends BaseAdapter {
         TextView txttench,txtdiachi,txtthoigian,txtsdt,txtShip,txtfb,txtnguoidang,txttimecreate;
     }
 
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -72,7 +73,7 @@ public class AdapterCuaHang extends BaseAdapter {
         viewHolder.txtfb.setText("Facebook Cửa Hàng :"+arraydangbai.get(i).facebook);
         viewHolder.txtnguoidang.setText("Create By:"+arraydangbai.get(i).create);
         viewHolder.txttimecreate.setText(arraydangbai.get(i).timecreate);
-        Picasso.with(mContext).load(arraydangbai.get(i).image).into(viewHolder.imgCh);
+        Glide.with(mContext).load(arraydangbai.get(i).image).into(viewHolder.imgCh);
         return rowview;
     }
 }

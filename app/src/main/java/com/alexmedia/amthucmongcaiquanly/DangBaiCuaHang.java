@@ -298,20 +298,6 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                             finish();
                         }
                     });
-//                    anhdulieu.putBytes(ImageUtil.getStreamByteFromImage(new File(FileUtil.getPath(getApplicationContext(),imgUri))))
-//                            .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-//                                    if (task.isSuccessful()){
-//                                        anhdulieu.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                            @Override
-//                                            public void onSuccess(Uri uri) {
-//                                                FirebaseDatabase.getInstance().getReference("CuaHang/DanhSachCuaHang").setValue(uri.toString());
-//                                            }
-//                                        });
-//                                    }
-//                                }
-//                            });
 
                     Log.d(TAG,"----------------------"+imgUri);
 

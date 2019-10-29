@@ -42,7 +42,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
@@ -105,7 +104,6 @@ public class DangCHMongCai extends AppCompatActivity implements AdapterView.OnIt
         facebookcuahang = intent.getStringExtra(MainActivity.FACEBOOK_CH);
         DiaChi = intent.getStringExtra(MainActivity.ADDRESS);
         tenCh = intent.getStringExtra(MainActivity.TENCH);
-        Picasso.with(context).load(MainActivity.IMAGE).into(imgHienThi1);
         //settitle return
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

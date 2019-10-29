@@ -43,7 +43,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -168,6 +167,19 @@ public class MainActivity extends AppCompatActivity {
                 DangBaiModel model = baiModelList.get(position);
                 showUpdateDeleteDialog(model.id, model.tench, model.diachi, model.thoigian, model.sodt, model.tinhtrangship,
                         model.danhmuc, model.facebook, model.timecreate, model.image, model.latitude, model.longitude, model.create);
+                intent.putExtra(ID, model.getId());
+                intent.putExtra(TENCH, model.getTench());
+                intent.putExtra(ADDRESS, model.getDiachi());
+                intent.putExtra(TIMEOPENEND, model.getThoigian());
+                intent.putExtra(SODIENTHOAI, model.getSodt());
+                intent.putExtra(SHIPTINHTRANG, model.getTinhtrangship());
+                intent.putExtra(FACEBOOK_CH, model.getFacebook());
+                intent.putExtra(DANHMUC, model.getDanhmuc());
+                intent.putExtra(CREATE_BY,model.getCreate());
+                intent.putExtra(IMAGE, model.getImage());
+                intent.putExtra(DATE_CREATE,model.getTimecreate());
+                intent.putExtra(LATITUDE,model.getLatitude());
+                intent.putExtra(LONGITUDE,model.getLongitude());
                 return false;
             }
         });
@@ -203,6 +215,13 @@ public class MainActivity extends AppCompatActivity {
         charSequenceArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnDanhMuc.setAdapter(charSequenceArrayAdapter2);
         dialogbuilder.setTitle(cuahang);
+        edtTenCh.setText(cuahang);
+        edtDiaChi.setText(diachi);
+        edtSodt.setText(sodt);
+        edtfacebookch.setText(facebook);
+        edtngaydang.setText(ngaydang);
+        edtLatitude.setText(intent.getStringExtra(MainActivity.LATITUDE));
+        edtLongitude.setText(intent.getStringExtra(MainActivity.LONGITUDE));
         final AlertDialog b = dialogbuilder.create();
         edtThoiGianMo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,6 +302,9 @@ public class MainActivity extends AppCompatActivity {
                 double longitude = Double.parseDouble(edtLongitude.getText().toString());
                 String accountnguoidang = accountFacebook.getText().toString();
                 if (!TextUtils.isEmpty(tench)){
+                    Toast.makeText(MainActivity.this, "Yêu cầu nhập đầy đủ", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     updateArtist(id,tench,diachi,tongthoigian,sodt,spnChonTinhTrangShip,spnDanhMuc1,facebook,ngaydang,image,latitude,longitude,accountnguoidang);
                     b.dismiss();
                 }

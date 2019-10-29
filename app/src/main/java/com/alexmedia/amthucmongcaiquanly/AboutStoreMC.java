@@ -31,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
@@ -46,13 +47,12 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapter.ItemListener{
+public class AboutStoreMC extends AppCompatActivity{
 
     String tench,diachi,timeopen,sodt,fb,createby,danhmuc,ship,image;
     String id,image3;
@@ -69,10 +69,8 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
     ProgressBar pgmc;
     ProgressDialog dialog;
     List<ModelImageCuaHANG> mc1;
-    AdapterImageCuaHang adapterImageCuaHang;
     StorageTask mUploadTasks;
-    RecyclerView recycleViewAdapter;
-    ArrayList arrayList;
+    GridView lvGridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +117,7 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
                 Toast.makeText(AboutStoreMC.this, "ccc", Toast.LENGTH_SHORT).show();
             }
         });
+        lvGridView = findViewById(R.id.lvDanhSachChon);
         dialog.setTitle("Xin vui lòng chờ upload");
         setTitle("Thông tin cửa hàng");
         diachifix.setText("Địa Chỉ" + diachi);
@@ -128,7 +127,7 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
         create1.setText("Mail Create: "+createby);
         danhmuc1.setText("Danh Mục: "+danhmuc);
         tinhtrangship1.setText("Tình Trạng Giao Hàng: " + ship);
-        Picasso.with(context).load(image).into(imgCH);
+        Glide.with(this).load(image).into(imgCH);
         imgHienThiUpload = findViewById(R.id.imgHienThiCacAnh);
         themhinhanh = findViewById(R.id.btnChooseImage);
         imgThemAnhToanBo = findViewById(R.id.imgUpload2);
@@ -148,18 +147,24 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
                 }
             }
         });
-        recycleViewAdapter = findViewById(R.id.recyclerView);
-        arrayList = new ArrayList();
-        arrayList.add(new DataModel("Item 1", R.drawable.ic_android_black_24dp, "#09A9FF"));
-        arrayList.add(new DataModel("Item 2", R.drawable.ic_android_black_24dp, "#3E51B1"));
-        arrayList.add(new DataModel("Item 3", R.drawable.ic_android_black_24dp, "#673BB7"));
-        arrayList.add(new DataModel("Item 4", R.drawable.ic_android_black_24dp, "#4BAA50"));
-        arrayList.add(new DataModel("Item 5", R.drawable.ic_android_black_24dp, "#F94336"));
-        arrayList.add(new DataModel("Item 6", R.drawable.ic_android_black_24dp, "#0A9B88"));
-        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        recycleViewAdapter.setLayoutManager(manager);
-        AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(this, 500);
-        recycleViewAdapter.setLayoutManager(layoutManager);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mc1.clear();
+                for (DataSnapshot list:dataSnapshot.getChildren()){
+                    ModelImageCuaHANG listValue = list.getValue(ModelImageCuaHANG.class);
+                    mc1.add(listValue);
+                    GridAdapter gridAdapter = new GridAdapter(getApplicationContext(),R.layout.adapter_imagecuahang,mc1);
+                    lvGridView.setAdapter(gridAdapter);
+                    gridAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     private void ShowFile() {
         Intent intent = new Intent();
@@ -200,13 +205,14 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
                     },500);
                     Toast.makeText(AboutStoreMC.this, "Updated Complete", Toast.LENGTH_SHORT).show();
                     taskSnapshot.getUploadSessionUri().toString();
+                    image3 = mc1.toString();
                     mc1.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
                             ModelImageCuaHANG modelImageCuaHANG = new ModelImageCuaHANG(id,image3);
-                            modelImageCuaHANG.setImagegoc(uri.toString());
-                            modelImageCuaHANG.setId(id);
+                            modelImageCuaHANG.setImage(uri.toString());
                             id = databaseReference.push().getKey();
+                            modelImageCuaHANG.setId(id);
                             databaseReference.child(id).setValue(modelImageCuaHANG);
                         }
                     });
@@ -228,15 +234,5 @@ public class AboutStoreMC extends AppCompatActivity implements RecycleViewAdapte
         }else {
             Toast.makeText(this, "Not file update image", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void onItemClick(DataModel item) {
-        Toast.makeText(getApplicationContext(), item.text + " is clicked", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 }
