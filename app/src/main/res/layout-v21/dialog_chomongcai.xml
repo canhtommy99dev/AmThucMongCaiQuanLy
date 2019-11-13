@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/imageCeater"
+            android:src="@drawable/ic_image_black_24dp"></ImageView>
+    <TextView
+        android:id="@+id/txtGioiThieuDulich"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Day">
+    </TextView>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="WebViewLayout">
+    <WebView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/probarandroid"/>
+</RelativeLayout>
+</LinearLayout>

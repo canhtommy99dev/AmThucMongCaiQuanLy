@@ -18,13 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DangCHMongCai" />
-        <activity android:name=".AboutStoreMC" />
-        <activity android:name=".DangBaiCuaHang" />
-        <activity android:name=".ResetPassword" />
-        <activity android:name=".RegisterEmail" />
-        <activity android:name=".DangNhapFB" />
-        <activity android:name=".MapKiemTra" />
+        <activity android:name=".InfomationDuLich"></activity>
+        <activity android:name=".ThemDuLich" />
+        <activity android:name=".AboutApplication" />
+        <activity android:name=".DanhSachDuLich" />
+        <activity android:name=".MenuTongHop" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,6 +35,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".MapTestMC"
+            android:label="@string/title_activity_map_test_mc" />
+        <activity android:name=".DangCHMongCai" />
+        <activity android:name=".AboutStoreMC" />
+        <activity android:name=".DangBaiCuaHang" />
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".RegisterEmail" />
+        <activity android:name=".DangNhapFB" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>

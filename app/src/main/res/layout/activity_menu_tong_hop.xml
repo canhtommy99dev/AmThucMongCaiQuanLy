@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuTongHop"
+    android:orientation="vertical"
+    android:background="@drawable/recc">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/btnBack111333"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+        <TextView
+            android:textColor="#fff"
+            android:gravity="center"
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Memu Plus"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <Button
+            android:textColor="#fff"
+            android:background="@drawable/round"
+            android:id="@+id/btnthem"
+            android:layout_width="261dp"
+            android:layout_height="63dp"
+            android:text="Thêm Du Lịch"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:textColor="#fff"
+            android:background="@drawable/round"
+            android:id="@+id/danhSachDuLich"
+            android:layout_width="256dp"
+            android:layout_height="56dp"
+            android:text="Danh Sách Du Lịch"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:textColor="#fff"
+            android:background="@drawable/round"
+            android:id="@+id/btnAboutCreaet"
+            android:layout_width="257dp"
+            android:layout_height="62dp"
+            android:text="About Create Application"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -52,7 +52,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     TextView accountFacebook;
     Button btnLog2;
-    ImageView btnLogout, btnThemCuaHang, btnKiemTraApp;
+    ImageView btnPlus, btnThemCuaHang, btnKiemTraApp;
     ListView lvDsCuaHang;
     List<DangBaiModel> baiModelList;
     FirebaseAuth auth;
@@ -97,7 +97,14 @@ public class MainActivity extends AppCompatActivity {
         btnKiemTraApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MapKiemTra.class));
+                startActivity(new Intent(getApplicationContext(), MapTestMC.class));
+            }
+        });
+        btnPlus = findViewById(R.id.clickplus);
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),MenuTongHop.class));
             }
         });
         loadingimage = findViewById(R.id.pro_clice);

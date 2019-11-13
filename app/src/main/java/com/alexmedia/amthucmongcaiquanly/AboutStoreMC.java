@@ -3,23 +3,27 @@ package com.alexmedia.amthucmongcaiquanly;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +31,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,7 +75,8 @@ public class AboutStoreMC extends AppCompatActivity{
     ProgressDialog dialog;
     List<ModelImageCuaHANG> mc1;
     StorageTask mUploadTasks;
-    GridView lvGridView;
+    RecyclerView listdodulieu;
+    AdapterIntroCuaHang adapterIntroCuaHang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +123,6 @@ public class AboutStoreMC extends AppCompatActivity{
                 Toast.makeText(AboutStoreMC.this, "ccc", Toast.LENGTH_SHORT).show();
             }
         });
-        lvGridView = findViewById(R.id.lvDanhSachChon);
         dialog.setTitle("Xin vui lòng chờ upload");
         setTitle("Thông tin cửa hàng");
         diachifix.setText("Địa Chỉ" + diachi);
@@ -147,22 +152,14 @@ public class AboutStoreMC extends AppCompatActivity{
                 }
             }
         });
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        listdodulieu = findViewById(R.id.lvDanhSachChon);
+        adapterIntroCuaHang = new AdapterIntroCuaHang(this,mc1);
+        listdodulieu.setAdapter(adapterIntroCuaHang);
+        listdodulieu.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        listdodulieu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mc1.clear();
-                for (DataSnapshot list:dataSnapshot.getChildren()){
-                    ModelImageCuaHANG listValue = list.getValue(ModelImageCuaHANG.class);
-                    mc1.add(listValue);
-                    GridAdapter gridAdapter = new GridAdapter(getApplicationContext(),R.layout.adapter_imagecuahang,mc1);
-                    lvGridView.setAdapter(gridAdapter);
-                    gridAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onClick(View v) {
+                Toast.makeText(context, "Xóa ảnh", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -229,10 +226,58 @@ public class AboutStoreMC extends AppCompatActivity{
                 public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double process = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                     pgmc.setProgress((int) process);
+                    createDialog();
                 }
             });
         }else {
             Toast.makeText(this, "Not file update image", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mc1.clear();
+                for (DataSnapshot postsnap:dataSnapshot.getChildren()){
+                    ModelImageCuaHANG modelImageCuaHANG = postsnap.getValue(ModelImageCuaHANG.class);
+                    mc1.add(modelImageCuaHANG);
+                    adapterIntroCuaHang.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void createDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
+        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3500);
     }
 }

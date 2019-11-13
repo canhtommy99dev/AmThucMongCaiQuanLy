@@ -2,12 +2,12 @@ package com.alexmedia.amthucmongcaiquanly;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
@@ -26,6 +26,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -264,6 +265,7 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                         @Override
                         public void run() {
                             pgmc.setProgress(0);
+                            createDialog();
                         }
                     }, 500);
                     Toast.makeText(DangBaiCuaHang.this, "Đã Up ảnh lên thành công", Toast.LENGTH_SHORT).show();
@@ -312,6 +314,7 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                 public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double process = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                     pgmc.setProgress((int) process);
+                    createDialog();
                 }
             });
         } else {
@@ -319,5 +322,13 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
         }
     }
     ///loadapp
-
+    public void createDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
 }

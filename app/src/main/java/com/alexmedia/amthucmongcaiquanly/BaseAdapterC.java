@@ -1,40 +1,37 @@
 package com.alexmedia.amthucmongcaiquanly;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class GridAdapter extends BaseAdapter {
+public class BaseAdapterC extends BaseAdapter {
 
-    Context mcontext;
+    Activity context;
+    List<ModelImageCuaHANG> modelImageCuaHANGS;
     int mLayout;
-    List<ModelImageCuaHANG> arrayCH;
 
-    public GridAdapter(Context context, int mLayout, List<ModelImageCuaHANG> arrayCH) {
-        this.mcontext = context;
+    public BaseAdapterC(Activity context, List<ModelImageCuaHANG> modelImageCuaHANGS, int mLayout) {
+        this.context = context;
+        this.modelImageCuaHANGS = modelImageCuaHANGS;
         this.mLayout = mLayout;
-        this.arrayCH = arrayCH;
-    }
-    private class ViewHolder{
-        ImageView imgCh1;
     }
 
     @Override
     public int getCount() {
-        return arrayCH.size();
+        return modelImageCuaHANGS.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return arrayCH.get(position);
+        return modelImageCuaHANGS.get(position);
     }
 
     @Override
@@ -42,17 +39,22 @@ public class GridAdapter extends BaseAdapter {
         return 0;
     }
 
+    private class ViewHolder{
+        ImageView mc;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowview = convertView;
         ViewHolder viewHolder = new ViewHolder();
         if (rowview == null){
             rowview = inflater.inflate(mLayout,null);
-            viewHolder.imgCh1 = rowview.findViewById(R.id.photoView1);
+            viewHolder.mc = rowview.findViewById(R.id.anhchuamc);
         }else {
             viewHolder = (ViewHolder) rowview.getTag();
         }
+        Glide.with(context).load(modelImageCuaHANGS.get(position).image).into(viewHolder.mc);
         return rowview;
     }
 }
