@@ -31,7 +31,6 @@ public class ImageFullScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_full_screen);
         intent = getIntent();
-
         id = intent.getStringExtra(AdapterIntroCuaHang.ID);
         image88 = intent.getStringExtra(AdapterIntroCuaHang.IMAGE66);
         imageView1l = findViewById(R.id.photomc);
