@@ -73,8 +73,8 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
     FirebaseStorage storage;
     StorageTask mUploadTask;
     EditText edtTenCH, edtDiaChi, edtThoiGianMo, edtThoiGianDong, edtfacebookch, edtngaydang, latiture1, longitude1, edtSdt;
-    String key_id, tenCh, DiaChi, thoigianmo, thoigiandong, sodt, tongthoigian, facebookcuahang, nguoidang, shiphoatdong, ngaydangbai, spnDanhMuc1, amPm,image;
-    Double latiture, longitude;
+    String key_id, tenCh, DiaChi, thoigianmo, thoigiandong, sodt, tongthoigian, facebookcuahang, nguoidang, shiphoatdong, ngaydangbai, spnDanhMuc1, amPm,image,latiture, longitude;
+    Double lang1,long1;
     Button chonanh,uplen;
     DatePickerDialog pdialog;
     ImageView quaylai, themvao, imgHienThi;
@@ -163,7 +163,8 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
             public void onClick(View view) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(DangBaiCuaHang.this, "Đang up để xử lý", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else{
                     uploadImage();
                 }
             }
@@ -282,27 +283,34 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                     spnDanhMuc1 = spnDanhMuc.getSelectedItem().toString();
                     facebookcuahang = edtfacebookch.getText().toString();
                     ngaydangbai = edtngaydang.getText().toString();
-                    latiture = Double.parseDouble(latiture1.getText().toString());
-                    longitude = Double.parseDouble(longitude1.getText().toString());
+                    latiture = latiture1.getText().toString();
+                    longitude = longitude1.getText().toString();
+                    lang1 = Double.valueOf(latiture);
+                    long1 =  Double.valueOf(longitude);
+//                    latiture = Double.parseDouble(latiture1.getText().toString());
+//                    longitude = Double.parseDouble(longitude1.getText().toString());
                     nguoidang = account.getText().toString();
                     taskSnapshot.getUploadSessionUri().toString();
 
-                    fileRes.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            DangBaiModel dangBaiModel = new DangBaiModel(
-                                    key_id,tenCh,DiaChi,tongthoigian,shiphoatdong,facebookcuahang,nguoidang,ngaydangbai,image,latiture,longitude,spnDanhMuc1,sodt
-                            );
-                            dangBaiModel.setImage(uri.toString());
-                            key_id = dataQuanly.push().getKey();
-                            dangBaiModel.setId(key_id);
-                            dataQuanly.child(key_id).setValue(dangBaiModel);
-                            finish();
-                        }
-                    });
-
-                    Log.d(TAG,"----------------------"+imgUri);
-
+                    if (tenCh.isEmpty() || DiaChi.isEmpty() || thoigianmo.isEmpty() || thoigiandong.isEmpty() ||sodt.isEmpty()||
+                    shiphoatdong.isEmpty() || facebookcuahang.isEmpty() || ngaydangbai.isEmpty() || latiture.isEmpty() || longitude.isEmpty()){
+                        Toast.makeText(DangBaiCuaHang.this, "Nhập cái vẫn còn trống ...!!!", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        fileRes.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                DangBaiModel dangBaiModel = new DangBaiModel(
+                                        key_id,tenCh,DiaChi,tongthoigian,shiphoatdong,facebookcuahang,nguoidang,ngaydangbai,image,lang1,long1,spnDanhMuc1,sodt
+                                );
+                                dangBaiModel.setImage(uri.toString());
+                                key_id = dataQuanly.push().getKey();
+                                dangBaiModel.setId(key_id);
+                                dataQuanly.child(key_id).setValue(dangBaiModel);
+                                finish();
+                            }
+                        });
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -318,17 +326,35 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                 }
             });
         } else {
-            Toast.makeText(this, "Không file để up", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Không file để up & nhập đầy đủ", Toast.LENGTH_SHORT).show();
         }
     }
     ///loadapp
     public void createDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
-        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
         alert.setView(alertLayout);
         alert.setCancelable(false);
-        AlertDialog dialog = alert.create();
+        final AlertDialog dialog = alert.create();
         dialog.show();
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3500);
     }
 }

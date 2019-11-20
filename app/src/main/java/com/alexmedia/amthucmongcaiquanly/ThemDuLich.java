@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -43,7 +44,6 @@ public class ThemDuLich extends AppCompatActivity {
     StorageReference anhdulieu1;
     private static final int CHOOSE_IMAGE = 1;
     private Uri imgUri;
-    private static final String TAG = "MyFirebaseService";
     Button btnUpLoad;
     ProgressBar prog1;
     StorageTask mUploadTask;
@@ -55,6 +55,12 @@ public class ThemDuLich extends AppCompatActivity {
         anhdulieu1 = FirebaseStorage.getInstance().getReference("CuaHang/DanhSachCuaHang");
         dataDuLich = FirebaseDatabase.getInstance().getReference("DuLich");
         btnClickBack = findViewById(R.id.btnBack155);
+        btnClickBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btnMamual = findViewById(R.id.androidMamual);
         edtTenDuLich = findViewById(R.id.edtTenDuLich);
         edtStreetView = findViewById(R.id.edtLinkStreetView);
@@ -80,9 +86,6 @@ public class ThemDuLich extends AppCompatActivity {
             }
         });
     }
-
-
-
     private void ShowFile() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -108,7 +111,7 @@ public class ThemDuLich extends AppCompatActivity {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
     private void uploadImage() {
-        if (imgUri != null){
+        if (imgUri != null ){
             final StorageReference fileres = anhdulieu1.child(System.currentTimeMillis()+"."+getFileExtension(imgUri));
             fileres.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -127,19 +130,23 @@ public class ThemDuLich extends AppCompatActivity {
                     baiviet = edtBaiViet.getText().toString();
                     image66 = fileres.toString();
                     taskSnapshot.getUploadSessionUri().toString();
-                    fileres.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            ModelDangBaiDuLich dangBaiDuLich = new ModelDangBaiDuLich(
-                                    key_id,tendulich,streetview,youtube,baiviet,image66
-                            );
-                            dangBaiDuLich.setImagedulich(uri.toString());
-                            key_id = dataDuLich.push().getKey();
-                            dangBaiDuLich.setId(key_id);
-                            dataDuLich.child(key_id).setValue(dangBaiDuLich);
-                            finish();
-                        }
-                    });
+                    if (tendulich.isEmpty() || streetview.isEmpty() || youtube.isEmpty()|| baiviet.isEmpty()){
+                        Toast.makeText(ThemDuLich.this, "Nhập đúng theo yêu cầu vào", Toast.LENGTH_SHORT).show();
+                    }else {
+                        fileres.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                ModelDangBaiDuLich dangBaiDuLich = new ModelDangBaiDuLich(
+                                        key_id,tendulich,streetview,youtube,baiviet,image66
+                                );
+                                dangBaiDuLich.setImagedulich(uri.toString());
+                                key_id = dataDuLich.push().getKey();
+                                dangBaiDuLich.setId(key_id);
+                                dataDuLich.child(key_id).setValue(dangBaiDuLich);
+                                finish();
+                            }
+                        });
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -154,15 +161,35 @@ public class ThemDuLich extends AppCompatActivity {
                     createDialog();
                 }
             });
+        }else {
+            Toast.makeText(this, "Không file để up & nhập đầy đủ", Toast.LENGTH_SHORT).show();
         }
     }
     public void createDialog() {
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
         alert.setView(alertLayout);
         alert.setCancelable(false);
-        AlertDialog dialog = alert.create();
+        final AlertDialog dialog = alert.create();
         dialog.show();
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3500);
     }
 }

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lvDsCuaHang;
     List<DangBaiModel> baiModelList;
     FirebaseAuth auth;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,imagecuahang;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     AdapterCuaHang adapterCuaHang;
     ProgressBar loadingimage;
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     int curHour, curMinute;
     TimePickerDialog timedialog;
     DatePickerDialog pdialog;
+    Double lat1,long12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     private void showUpdateDeleteDialog(final String id, final String cuahang, final String diachi,
                                         final String tongthoigian,
                                         final String sodt, final String shipdoan, final String doansang, final String facebook,
-                                        final String ngaydang, final String image, final double latitude, final double longitude, final String accountnguoidang) {
+                                        final String ngaydang, final String image, final Double latitude, final Double longitude, final String accountnguoidang) {
         AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialogfixbai, null);
@@ -221,14 +222,16 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> charSequenceArrayAdapter2 = ArrayAdapter.createFromResource(this, R.array.danhmuc, android.R.layout.select_dialog_item);
         charSequenceArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnDanhMuc.setAdapter(charSequenceArrayAdapter2);
-        dialogbuilder.setTitle(cuahang);
+        Double lat1 = latitude;
+        Double long1 = longitude;
+        dialogbuilder.setTitle("Sửa Chữa Cửa Hàng");
         edtTenCh.setText(cuahang);
         edtDiaChi.setText(diachi);
         edtSodt.setText(sodt);
         edtfacebookch.setText(facebook);
         edtngaydang.setText(ngaydang);
-        edtLatitude.setText(intent.getStringExtra(MainActivity.LATITUDE));
-        edtLongitude.setText(intent.getStringExtra(MainActivity.LONGITUDE));
+        edtLatitude.setText(String.valueOf(lat1));
+        edtLongitude.setText(String.valueOf(long1));
         final AlertDialog b = dialogbuilder.create();
         edtThoiGianMo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
                 double latitude = Double.parseDouble(edtLatitude.getText().toString());
                 double longitude = Double.parseDouble(edtLongitude.getText().toString());
                 String accountnguoidang = accountFacebook.getText().toString();
-                if (!TextUtils.isEmpty(tench)){
+                if (tench.isEmpty() || diachi.isEmpty() || thoigianmo.isEmpty() || thoigiandong.isEmpty() || sodt.isEmpty() || facebook.isEmpty()||ngaydang.isEmpty()){
                     Toast.makeText(MainActivity.this, "Yêu cầu nhập đầy đủ", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -339,11 +342,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean deleteArtist(String id) {
         //getting the specified artist reference
         databaseReference = FirebaseDatabase.getInstance().getReference("CuaHang/DanhSachCuaHang").child(id);
-
+        imagecuahang = FirebaseDatabase.getInstance().getReference("ImageAlbum").child(id);
         //removing artist
         databaseReference.removeValue();
+        imagecuahang.removeValue();
         Toast.makeText(getApplicationContext(), "Đã xóa thành công", Toast.LENGTH_LONG).show();
-
         return true;
     }
 }

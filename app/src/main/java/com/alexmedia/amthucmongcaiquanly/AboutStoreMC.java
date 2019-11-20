@@ -57,7 +57,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutStoreMC extends AppCompatActivity{
+public class AboutStoreMC extends AppCompatActivity {
 
     String tench,diachi,timeopen,sodt,fb,createby,danhmuc,ship,image;
     String id,image3;
@@ -77,6 +77,9 @@ public class AboutStoreMC extends AppCompatActivity{
     StorageTask mUploadTasks;
     RecyclerView listdodulieu;
     AdapterIntroCuaHang adapterIntroCuaHang;
+    public static final String ID = "ID";
+    public static final String IMAGEFULL = "image";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,15 +156,9 @@ public class AboutStoreMC extends AppCompatActivity{
             }
         });
         listdodulieu = findViewById(R.id.lvDanhSachChon);
-        adapterIntroCuaHang = new AdapterIntroCuaHang(this,mc1);
+        adapterIntroCuaHang = new AdapterIntroCuaHang(AboutStoreMC.this,mc1);
         listdodulieu.setAdapter(adapterIntroCuaHang);
         listdodulieu.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        listdodulieu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Xóa ảnh", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
     private void ShowFile() {
         Intent intent = new Intent();

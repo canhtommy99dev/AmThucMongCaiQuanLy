@@ -2,12 +2,16 @@ package com.alexmedia.amthucmongcaiquanly;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +24,14 @@ public class AdapterIntroCuaHang extends RecyclerView.Adapter<AdapterIntroCuaHan
 
     Context context;
     List<ModelImageCuaHANG> modelInfoCuaHangList;
+    public static final String ID = "id";
+    public static final String IMAGE66 = "Image";
+
 
     public AdapterIntroCuaHang(Context context, List<ModelImageCuaHANG> modelInfoCuaHangList) {
-        this.context = context;
+            this.context = context;
         this.modelInfoCuaHangList = modelInfoCuaHangList;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,8 +40,18 @@ public class AdapterIntroCuaHang extends RecyclerView.Adapter<AdapterIntroCuaHan
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         Glide.with(context).load(modelInfoCuaHangList.get(position).getImage()).into(holder.image);
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, modelInfoCuaHangList.get(position).id, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context,ImageFullScreen.class);
+                intent.putExtra(ID,modelInfoCuaHangList.get(position).id);
+                intent.putExtra(IMAGE66,modelInfoCuaHangList.get(position).image);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -43,7 +59,7 @@ public class AdapterIntroCuaHang extends RecyclerView.Adapter<AdapterIntroCuaHan
         return modelInfoCuaHangList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
 

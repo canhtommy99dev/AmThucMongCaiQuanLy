@@ -33,6 +33,13 @@ public class InfomationDuLich extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_infomation_du_lich);
         intent = getIntent();
+        btnBack = findViewById(R.id.btnBack12322);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         streetview = intent.getStringExtra(DanhSachDuLich.STREETVIEW);
         youtube = intent.getStringExtra(DanhSachDuLich.YOUTUBELINK);
         gioithieu = intent.getStringExtra(DanhSachDuLich.BAIVIETGIOITHIEU);

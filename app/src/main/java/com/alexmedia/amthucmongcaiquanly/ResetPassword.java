@@ -40,8 +40,12 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View view) {
                 String email = edtUser.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
+                if (email.isEmpty()) {
                     Toast.makeText(getApplication(), "Yêu cầu nhập Email để gửi để xác nhận...!!!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (email.length() < 6){
+                    Toast.makeText(ResetPassword.this, "Không nhập quá nhỏ 6 ký tự email", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

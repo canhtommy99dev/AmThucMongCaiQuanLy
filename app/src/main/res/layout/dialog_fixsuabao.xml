@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/addplus">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/imgScreen1"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_image_black_24dp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edtTenDuLich1"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:hint="Tên du lịch"
+                android:paddingLeft="15dp"
+                android:background="@drawable/edttext"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/edtLinkStreetView1"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:hint="Link Street View"
+                android:paddingLeft="15dp"
+                android:background="@drawable/edttext"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/edtlinkyoutube1"
+                android:textColor="#fff"
+                android:textColorHint="#fff"
+                android:hint="Link Youtube"
+                android:paddingLeft="15dp"
+                android:background="@drawable/edttext"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <EditText
+                    android:paddingLeft="15dp"
+                    android:background="@drawable/round"
+                    android:layout_alignParentTop="true"
+                    android:id="@+id/edtGioiThieu1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:hint="Giới thiệu du lịch"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:textColor="#fff"
+                    android:background="@drawable/round"
+                    android:id="@+id/buttonUploadBaiDang"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout"
+                    android:text="Cập Nhật" />
+                <Button
+                    android:textColor="#fff"
+                    android:background="#F44336"
+                    android:id="@+id/buttonXoaDuLich"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout"
+                    android:text="Xóa" />
+                <Button
+                    android:textColor="#fff"
+                    android:background="#673AB7"
+                    android:id="@+id/buttonthethoi"
+                    android:layout_margin="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout"
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
