@@ -24,7 +24,6 @@ public class ImageFullScreen extends AppCompatActivity {
     Intent intent;
     String id,image88;
     PhotoView imageView1l;
-    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
