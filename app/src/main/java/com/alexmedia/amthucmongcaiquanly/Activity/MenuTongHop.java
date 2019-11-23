@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.alexmedia.amthucmongcaiquanly.R;
 
 public class MenuTongHop extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.alexmedia.amthucmongcaiquanly.Model.ModelImageCuaHANG;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -54,7 +56,7 @@ public class BaseAdapterC extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) rowview.getTag();
         }
-        Glide.with(context).load(modelImageCuaHANGS.get(position).image).into(viewHolder.mc);
+        Glide.with(context).load(modelImageCuaHANGS.get(position).getImage()).into(viewHolder.mc);
         return rowview;
     }
 }

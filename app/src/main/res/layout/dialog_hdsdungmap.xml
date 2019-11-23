@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đây là kiểm tra Map có hiển thị đầy đủ "
+        android:gravity="center"/>
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hiện thị các cửa hàng trên địa bàn Móng Cái"
+        android:gravity="center"/>
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nếu mà sai xót thì có thể fix lại bài và check lại đường dẫn"
+        android:gravity="center"/>
+    <TextView
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xin cảm ơn ...!! Chúc các bạn thành công"
+        android:gravity="center"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backbutton"
+        android:text="Đóng lại nhé"
+        android:background="@drawable/round"
+        android:textColor="#fff"></Button>
+</LinearLayout>

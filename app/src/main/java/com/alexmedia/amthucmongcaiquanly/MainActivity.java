@@ -1,22 +1,16 @@
 package com.alexmedia.amthucmongcaiquanly;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.InputType;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,10 +26,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
+import com.alexmedia.amthucmongcaiquanly.Activity.AboutStoreMC;
+import com.alexmedia.amthucmongcaiquanly.Activity.DangBaiCuaHang;
+import com.alexmedia.amthucmongcaiquanly.Activity.MapTestMC;
+import com.alexmedia.amthucmongcaiquanly.Activity.MenuTongHop;
+import com.alexmedia.amthucmongcaiquanly.Adapter.AdapterCuaHang;
+import com.alexmedia.amthucmongcaiquanly.Model.DangBaiModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +42,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -105,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MenuTongHop.class));
+                startActivity(new Intent(getApplicationContext(), MenuTongHop.class));
             }
         });
         loadingimage = findViewById(R.id.pro_clice);
@@ -173,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 DangBaiModel model = baiModelList.get(position);
-                showUpdateDeleteDialog(model.id, model.tench, model.diachi, model.thoigian, model.sodt, model.tinhtrangship,
-                        model.danhmuc, model.facebook, model.timecreate, model.image, model.latitude, model.longitude, model.create);
+                showUpdateDeleteDialog(model.getId(), model.getTench(), model.getDiachi(), model.getThoigian(), model.getSodt(), model.getTinhtrangship(),
+                        model.getDanhmuc(), model.getFacebook(), model.getTimecreate(), model.getImage(), model.getLatitude(), model.getLongitude(), model.getCreate());
                 intent.putExtra(ID, model.getId());
                 intent.putExtra(TENCH, model.getTench());
                 intent.putExtra(ADDRESS, model.getDiachi());

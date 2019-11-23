@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Model;
 
 public class ModelImageCuaHANG {
     String id,image;

@@ -18,12 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ImageFullScreen"></activity>
-        <activity android:name=".InfomationDuLich" />
-        <activity android:name=".ThemDuLich" />
-        <activity android:name=".AboutApplication" />
-        <activity android:name=".DanhSachDuLich" />
-        <activity android:name=".MenuTongHop" />
+        <activity android:name=".Activity.AccountLogin"></activity>
+        <activity android:name=".Activity.ImageFullScreen" />
+        <activity android:name=".Activity.InfomationDuLich" />
+        <activity android:name=".Activity.ThemDuLich" />
+        <activity android:name=".Activity.AboutApplication" />
+        <activity android:name=".Activity.DanhSachDuLich" />
+        <activity android:name=".Activity.MenuTongHop" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -37,23 +38,23 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapTestMC"
+            android:name=".Activity.MapTestMC"
             android:label="@string/title_activity_map_test_mc"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DangCHMongCai"
+            android:name=".Activity.DangCHMongCai"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AboutStoreMC"
+            android:name=".Activity.AboutStoreMC"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DangBaiCuaHang"
+            android:name=".Activity.DangBaiCuaHang"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ResetPassword"
+            android:name=".Activity.ResetPassword"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterEmail"
+            android:name=".Activity.RegisterEmail"
             android:screenOrientation="portrait" />
         <activity
             android:name=".DangNhapFB"

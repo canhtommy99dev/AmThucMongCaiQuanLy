@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alexmedia.amthucmongcaiquanly.MainActivity;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -79,7 +81,7 @@ public class RegisterEmail extends AppCompatActivity {
                             Toast.makeText(RegisterEmail.this, "Lỗi khi đăng ký (có tài khoản rồi !!!)", Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            startActivity(new Intent(RegisterEmail.this,MainActivity.class));
+                            startActivity(new Intent(RegisterEmail.this, MainActivity.class));
                             finish();
                         }
                     }

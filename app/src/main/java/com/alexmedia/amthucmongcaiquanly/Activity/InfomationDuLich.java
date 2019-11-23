@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DatabaseReference;
 
 public class InfomationDuLich extends AppCompatActivity {
 

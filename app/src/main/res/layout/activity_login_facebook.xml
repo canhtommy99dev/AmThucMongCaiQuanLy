@@ -11,13 +11,8 @@
         android:id="@+id/imgLogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginLeft="49dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
-        android:layout_marginBottom="239dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginBottom="85dp"
         app:layout_constraintBottom_toTopOf="@+id/edtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,59 +20,53 @@
         app:srcCompat="@drawable/iconcreate" />
 
     <EditText
-        android:textColor="#fff"
         android:id="@+id/edtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/edttext"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/edtPassword"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:textColor="#fff"
         android:id="@+id/edtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="46dp"
         android:background="@drawable/edttext"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/imgClickLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#fff"
+        app:layout_constraintStart_toStartOf="@+id/edtEmail"
         app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
 
     <ImageView
         android:id="@+id/imgClickLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="9dp"
         android:src="@drawable/btnlogin"
-        app:layout_constraintBottom_toTopOf="@+id/txtClickReg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/chbxmmm1" />
 
     <TextView
         android:id="@+id/txtClickReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="43dp"
         android:text="Tôi chưa có tài khoản đăng nhập"
-        app:layout_constraintBottom_toTopOf="@+id/txtForget"
-        app:layout_constraintStart_toStartOf="@+id/edtPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgClickLogin" />
 
     <TextView
@@ -85,11 +74,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginTop="47dp"
         android:text="Tôi quên mật khẩu rồi"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/txtClickReg"
         app:layout_constraintTop_toBottomOf="@+id/txtClickReg" />
+
+    <CheckBox
+        android:id="@+id/chbxmmm1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="Remember"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="@+id/imgClickLogin"
+        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

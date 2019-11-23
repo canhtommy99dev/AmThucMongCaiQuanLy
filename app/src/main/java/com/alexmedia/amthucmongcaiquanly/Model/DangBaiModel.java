@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Model;
 
 public class DangBaiModel {
     String id,tench,diachi,thoigian,sodt,tinhtrangship,facebook,create,timecreate,image,danhmuc;

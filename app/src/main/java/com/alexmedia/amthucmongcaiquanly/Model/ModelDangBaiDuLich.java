@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Model;
 
 public class ModelDangBaiDuLich {
     String id,namedulich,linkgoogle,linkyoutube,baidang,imagedulich;

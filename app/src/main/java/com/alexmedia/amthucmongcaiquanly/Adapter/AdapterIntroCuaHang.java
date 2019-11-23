@@ -1,21 +1,18 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alexmedia.amthucmongcaiquanly.Activity.ImageFullScreen;
+import com.alexmedia.amthucmongcaiquanly.Model.ModelImageCuaHANG;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -46,9 +43,9 @@ public class AdapterIntroCuaHang extends RecyclerView.Adapter<AdapterIntroCuaHan
             @Override
             public void onClick(View v) {
 //                Toast.makeText(context, modelInfoCuaHangList.get(position).id, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context,ImageFullScreen.class);
-                intent.putExtra(ID,modelInfoCuaHangList.get(position).id);
-                intent.putExtra(IMAGE66,modelInfoCuaHangList.get(position).image);
+                Intent intent = new Intent(context, ImageFullScreen.class);
+                intent.putExtra(ID,modelInfoCuaHangList.get(position).getId());
+                intent.putExtra(IMAGE66,modelInfoCuaHangList.get(position).getImage());
                 context.startActivity(intent);
             }
         });

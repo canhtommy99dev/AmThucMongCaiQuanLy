@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Adapter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.alexmedia.amthucmongcaiquanly.Model.ModelDangBaiDuLich;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class AdapterDuLich extends ArrayAdapter<ModelDangBaiDuLich> {
     Activity activity;
     List<ModelDangBaiDuLich> modelDangBaiDuLiches;
     public AdapterDuLich(Activity activity,List<ModelDangBaiDuLich> modelDangBaiDuLiches) {
-        super(activity,R.layout.adapter_dulich,modelDangBaiDuLiches);
+        super(activity, R.layout.adapter_dulich,modelDangBaiDuLiches);
         this.activity = activity;
         this.modelDangBaiDuLiches = modelDangBaiDuLiches;
     }
@@ -45,7 +47,7 @@ public class AdapterDuLich extends ArrayAdapter<ModelDangBaiDuLich> {
         ImageView imgAnhMc = listItems.findViewById(R.id.imgCuaHangDoLen1);
         ModelDangBaiDuLich listDanhSach = modelDangBaiDuLiches.get(position);
         tenDiaChi.setText(listDanhSach.getNamedulich());
-        Glide.with(activity).load(listDanhSach.imagedulich).centerCrop().into(imgAnhMc);
+        Glide.with(activity).load(listDanhSach.getImagedulich()).centerCrop().into(imgAnhMc);
         Animation animation = AnimationUtils.loadAnimation(activity,R.anim.zoom_in);
         listItems.startAnimation(animation);
         return listItems;

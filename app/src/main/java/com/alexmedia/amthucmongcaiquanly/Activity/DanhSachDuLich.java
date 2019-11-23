@@ -1,14 +1,11 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,9 +14,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alexmedia.amthucmongcaiquanly.Adapter.AdapterDuLich;
+import com.alexmedia.amthucmongcaiquanly.Model.ModelDangBaiDuLich;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DanhSachDuLich extends AppCompatActivity {
-    ImageView btnQuayLai,imaInfo;
+    ImageView btnQuayLai,imaInfo,androidmamual;
     ListView lvDuLich;
     DatabaseReference dataDuLich1;
     AdapterDuLich adapterDuLich;
@@ -45,7 +44,7 @@ public class DanhSachDuLich extends AppCompatActivity {
     public static final String IMAGEDULICH = "imagedulich";
     Intent intent;
     EditText edtTenChinh,edtStreetview,edtYoutube,edtNoiDung;
-    Button btnUpload,btnDelete,btnCancel;
+    Button btnUpload,btnDelete,btnCancel,btnDongLai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,13 @@ public class DanhSachDuLich extends AppCompatActivity {
             }
         });
         arrayModel = new ArrayList<>();
+        androidmamual = findViewById(R.id.androidMamual1);
+        androidmamual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDialog1();
+            }
+        });
         lvDuLich =  findViewById(R.id.listviewDS);
         dataDuLich1 = FirebaseDatabase.getInstance().getReference("DuLich");
         progxuly1 = findViewById(R.id.proload);
@@ -71,12 +77,12 @@ public class DanhSachDuLich extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ModelDangBaiDuLich modelDangBaiDuLich = arrayModel.get(position);
                 Intent intent = new Intent(getApplicationContext(),InfomationDuLich.class);
-                intent.putExtra(ID,modelDangBaiDuLich.id);
-                intent.putExtra(TENDULICH,modelDangBaiDuLich.namedulich);
-                intent.putExtra(STREETVIEW,modelDangBaiDuLich.linkgoogle);
-                intent.putExtra(YOUTUBELINK,modelDangBaiDuLich.linkyoutube);
-                intent.putExtra(BAIVIETGIOITHIEU,modelDangBaiDuLich.baidang);
-                intent.putExtra(IMAGEDULICH,modelDangBaiDuLich.imagedulich);
+                intent.putExtra(ID,modelDangBaiDuLich.getId());
+                intent.putExtra(TENDULICH,modelDangBaiDuLich.getNamedulich());
+                intent.putExtra(STREETVIEW,modelDangBaiDuLich.getLinkgoogle());
+                intent.putExtra(YOUTUBELINK,modelDangBaiDuLich.getLinkyoutube());
+                intent.putExtra(BAIVIETGIOITHIEU,modelDangBaiDuLich.getBaidang());
+                intent.putExtra(IMAGEDULICH,modelDangBaiDuLich.getImagedulich());
                 startActivity(intent);
             }
         });
@@ -84,13 +90,14 @@ public class DanhSachDuLich extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 ModelDangBaiDuLich modelDangBaiDuLich = arrayModel.get(position);
-                showFixDuLich(modelDangBaiDuLich.id,modelDangBaiDuLich.namedulich,modelDangBaiDuLich.linkgoogle,modelDangBaiDuLich.linkyoutube,modelDangBaiDuLich.baidang,modelDangBaiDuLich.imagedulich);
-                intent.putExtra(ID,modelDangBaiDuLich.id);
-                intent.putExtra(TENDULICH,modelDangBaiDuLich.namedulich);
-                intent.putExtra(STREETVIEW,modelDangBaiDuLich.linkgoogle);
-                intent.putExtra(YOUTUBELINK,modelDangBaiDuLich.linkyoutube);
-                intent.putExtra(BAIVIETGIOITHIEU,modelDangBaiDuLich.baidang);
-                intent.putExtra(IMAGEDULICH,modelDangBaiDuLich.imagedulich);
+                showFixDuLich(modelDangBaiDuLich.getId(),modelDangBaiDuLich.getNamedulich(),modelDangBaiDuLich.getLinkgoogle(),modelDangBaiDuLich.getLinkyoutube()
+                        ,modelDangBaiDuLich.getBaidang(),modelDangBaiDuLich.getImagedulich());
+                intent.putExtra(ID,modelDangBaiDuLich.getId());
+                intent.putExtra(TENDULICH,modelDangBaiDuLich.getNamedulich());
+                intent.putExtra(STREETVIEW,modelDangBaiDuLich.getLinkgoogle());
+                intent.putExtra(YOUTUBELINK,modelDangBaiDuLich.getLinkyoutube());
+                intent.putExtra(BAIVIETGIOITHIEU,modelDangBaiDuLich.getBaidang());
+                intent.putExtra(IMAGEDULICH,modelDangBaiDuLich.getImagedulich());
                 return false;
             }
         });
@@ -185,5 +192,21 @@ public class DanhSachDuLich extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Đã xóa thành công", Toast.LENGTH_LONG).show();
 
         return true;
+    }
+    public void createDialog1() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_hdsdunglist, null);
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        btnDongLai = alertLayout.findViewById(R.id.donglaidialog1);
+        final android.app.AlertDialog dialog = alert.create();
+        dialog.show();
+        btnDongLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }

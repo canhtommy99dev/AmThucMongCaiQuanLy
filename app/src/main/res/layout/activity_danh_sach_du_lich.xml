@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DanhSachDuLich">
+    tools:context=".Activity.DanhSachDuLich">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

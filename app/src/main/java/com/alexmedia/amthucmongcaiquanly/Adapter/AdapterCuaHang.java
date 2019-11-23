@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alexmedia.amthucmongcaiquanly.Model.DangBaiModel;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -65,15 +67,15 @@ public class AdapterCuaHang extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) rowview.getTag();
         }
-        viewHolder.txttench.setText(arraydangbai.get(i).tench);
-        viewHolder.txtdiachi.setText("Địa chỉ :"+arraydangbai.get(i).diachi);
-        viewHolder.txtthoigian.setText(" -- "+arraydangbai.get(i).thoigian);
-        viewHolder.txtsdt.setText(" -- " + arraydangbai.get(i).sodt);
-        viewHolder.txtShip.setText("-- Ship đồ ăn :" + arraydangbai.get(i).tinhtrangship);
-        viewHolder.txtfb.setText("Facebook Cửa Hàng :"+arraydangbai.get(i).facebook);
-        viewHolder.txtnguoidang.setText("Create By:"+arraydangbai.get(i).create);
-        viewHolder.txttimecreate.setText(arraydangbai.get(i).timecreate);
-        Glide.with(mContext).load(arraydangbai.get(i).image).into(viewHolder.imgCh);
+        viewHolder.txttench.setText(arraydangbai.get(i).getTench());
+        viewHolder.txtdiachi.setText("Địa chỉ :"+arraydangbai.get(i).getDiachi());
+        viewHolder.txtthoigian.setText(" -- "+arraydangbai.get(i).getThoigian());
+        viewHolder.txtsdt.setText(" -- " + arraydangbai.get(i).getSodt());
+        viewHolder.txtShip.setText("-- Ship đồ ăn :" + arraydangbai.get(i).getTinhtrangship());
+        viewHolder.txtfb.setText("Facebook Cửa Hàng :"+arraydangbai.get(i).getFacebook());
+        viewHolder.txtnguoidang.setText("Create By:"+arraydangbai.get(i).getCreate());
+        viewHolder.txttimecreate.setText(arraydangbai.get(i).getTimecreate());
+        Glide.with(mContext).load(arraydangbai.get(i).getImage()).into(viewHolder.imgCh);
         return rowview;
     }
 }

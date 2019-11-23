@@ -1,4 +1,4 @@
-package com.alexmedia.amthucmongcaiquanly;
+package com.alexmedia.amthucmongcaiquanly.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -23,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.alexmedia.amthucmongcaiquanly.Model.ModelDangBaiDuLich;
+import com.alexmedia.amthucmongcaiquanly.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +45,7 @@ public class ThemDuLich extends AppCompatActivity {
     StorageReference anhdulieu1;
     private static final int CHOOSE_IMAGE = 1;
     private Uri imgUri;
-    Button btnUpLoad;
+    Button btnUpLoad,btnDongLai;
     ProgressBar prog1;
     StorageTask mUploadTask;
 
@@ -83,6 +84,12 @@ public class ThemDuLich extends AppCompatActivity {
                 } else {
                     uploadImage();
                 }
+            }
+        });
+        btnMamual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createDialog1();
             }
         });
     }
@@ -189,7 +196,21 @@ public class ThemDuLich extends AppCompatActivity {
                 handler.removeCallbacks(runnable);
             }
         });
-
-        handler.postDelayed(runnable, 3500);
+    }
+    public void createDialog1() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_hdsdung, null);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        btnDongLai = alertLayout.findViewById(R.id.donglaidialog);
+        final AlertDialog dialog = alert.create();
+        dialog.show();
+        btnDongLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 }
