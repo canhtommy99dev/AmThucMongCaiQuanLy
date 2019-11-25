@@ -27,6 +27,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alexmedia.amthucmongcaiquanly.Activity.AboutStoreMC;
+import com.alexmedia.amthucmongcaiquanly.Activity.AccountLogin;
 import com.alexmedia.amthucmongcaiquanly.Activity.DangBaiCuaHang;
 import com.alexmedia.amthucmongcaiquanly.Activity.MapTestMC;
 import com.alexmedia.amthucmongcaiquanly.Activity.MenuTongHop;
@@ -89,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         accountFacebook = findViewById(R.id.txtAccountFacebook);
-        btnLog2 = findViewById(R.id.imgLogout34);
         btnThemCuaHang = findViewById(R.id.imgThemCuaHang);
         btnKiemTraApp = findViewById(R.id.imgKiemTra);
         btnKiemTraApp.setOnClickListener(new View.OnClickListener() {
@@ -107,12 +107,10 @@ public class MainActivity extends AppCompatActivity {
         });
         loadingimage = findViewById(R.id.pro_clice);
         accountFacebook.setText("Tài Khoản:" + user.getEmail());
-        btnLog2.setOnClickListener(new View.OnClickListener() {
+        accountFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                auth.signOut();
-                startActivity(new Intent(getApplicationContext(), DangNhapFB.class));
-                finish();
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AccountLogin.class));
             }
         });
         btnThemCuaHang.setOnClickListener(new View.OnClickListener() {

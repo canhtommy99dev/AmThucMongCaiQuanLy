@@ -19,30 +19,30 @@
             android:layout_height="wrap_content"
             android:text="ĐĂNG KÝ QUẢN LÝ"
             android:layout_gravity="center"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
 
 
         <EditText
-            android:layout_margin="10dp"
+            android:layout_margin="10sp"
             android:id="@+id/edtUserSignUp"
             android:layout_width="match_parent"
-            android:layout_height="61dp"
+            android:layout_height="61sp"
             android:background="@drawable/edttext"
             android:ems="10"
             android:hint="User"
             android:inputType="textEmailAddress"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="20sp" />
 
         <EditText
-            android:layout_margin="10dp"
+            android:layout_margin="10sp"
             android:background="@drawable/edttext"
             android:id="@+id/edtPasswordSignUp"
             android:layout_width="match_parent"
-            android:layout_height="68dp"
+            android:layout_height="68sp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:paddingLeft="20dp" />
+            android:paddingLeft="20sp" />
 
         <Button
             android:id="@+id/btnRegister1"

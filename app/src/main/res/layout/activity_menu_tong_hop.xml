@@ -14,8 +14,8 @@
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/btnBack111333"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:src="@drawable/ic_arrow_back_black_24dp"/>
 
         <TextView
@@ -41,27 +41,27 @@
             android:textColor="#fff"
             android:background="@drawable/round"
             android:id="@+id/btnthem"
-            android:layout_width="261dp"
-            android:layout_height="63dp"
+            android:layout_width="261sp"
+            android:layout_height="63sp"
             android:text="Thêm Du Lịch"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10sp"/>
 
         <Button
             android:textColor="#fff"
             android:background="@drawable/round"
             android:id="@+id/danhSachDuLich"
-            android:layout_width="256dp"
-            android:layout_height="56dp"
+            android:layout_width="256sp"
+            android:layout_height="56sp"
             android:text="Danh Sách Du Lịch"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10sp"/>
 
         <Button
             android:textColor="#fff"
             android:background="@drawable/round"
             android:id="@+id/btnAboutCreaet"
-            android:layout_width="257dp"
-            android:layout_height="62dp"
+            android:layout_width="257sp"
+            android:layout_height="62sp"
             android:text="About Create Application"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10sp"/>
     </LinearLayout>
 </LinearLayout>

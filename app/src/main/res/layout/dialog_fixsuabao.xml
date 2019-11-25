@@ -25,8 +25,8 @@
 
                 <ImageView
                     android:id="@+id/imgScreen1"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="150sp"
+                    android:layout_height="150sp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_image_black_24dp" />
             </LinearLayout>
@@ -36,37 +36,37 @@
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:hint="Tên du lịch"
-                android:paddingLeft="15dp"
+                android:paddingLeft="15sp"
                 android:background="@drawable/edttext"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"/>
+                android:layout_height="50sp"
+                android:layout_margin="10sp"/>
             <EditText
                 android:id="@+id/edtLinkStreetView1"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:hint="Link Street View"
-                android:paddingLeft="15dp"
+                android:paddingLeft="15sp"
                 android:background="@drawable/edttext"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"/>
+                android:layout_height="50sp"
+                android:layout_margin="10sp"/>
             <EditText
                 android:id="@+id/edtlinkyoutube1"
                 android:textColor="#fff"
                 android:textColorHint="#fff"
                 android:hint="Link Youtube"
-                android:paddingLeft="15dp"
+                android:paddingLeft="15sp"
                 android:background="@drawable/edttext"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"/>
+                android:layout_height="50sp"
+                android:layout_margin="10sp"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10sp">
                 <EditText
-                    android:paddingLeft="15dp"
+                    android:paddingLeft="15sp"
                     android:background="@drawable/round"
                     android:layout_alignParentTop="true"
                     android:id="@+id/edtGioiThieu1"
@@ -87,7 +87,7 @@
                     android:textColor="#fff"
                     android:background="@drawable/round"
                     android:id="@+id/buttonUploadBaiDang"
-                    android:layout_margin="5dp"
+                    android:layout_margin="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linearLayout"
@@ -96,7 +96,7 @@
                     android:textColor="#fff"
                     android:background="#F44336"
                     android:id="@+id/buttonXoaDuLich"
-                    android:layout_margin="5dp"
+                    android:layout_margin="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linearLayout"
@@ -105,7 +105,7 @@
                     android:textColor="#fff"
                     android:background="#673AB7"
                     android:id="@+id/buttonthethoi"
-                    android:layout_margin="5dp"
+                    android:layout_margin="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/linearLayout"

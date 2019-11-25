@@ -75,7 +75,7 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
     Context context = this;
     private FusedLocationProviderClient mFusedLocationClient;
     private static final String TAG = "MyFirebaseService";
-
+    AlertDialog dialog;
 
 
     @Override
@@ -152,6 +152,7 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                 }
                 else{
                     uploadImage();
+                    dialog.show();
                 }
             }
         });
@@ -197,6 +198,12 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                 timedialog.show();
             }
         });
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
+        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        dialog = alert.create();
     }
 
     private void ShowFile() {
@@ -252,7 +259,6 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                         @Override
                         public void run() {
                             pgmc.setProgress(0);
-                            createDialog();
                         }
                     }, 500);
                     Toast.makeText(DangBaiCuaHang.this, "Đã Up ảnh lên thành công", Toast.LENGTH_SHORT).show();
@@ -308,39 +314,12 @@ public class DangBaiCuaHang extends AppCompatActivity implements AdapterView.OnI
                 public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                     double process = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
                     pgmc.setProgress((int) process);
-                    createDialog();
                 }
             });
         } else {
             Toast.makeText(this, "Không file để up & nhập đầy đủ", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
     }
     ///loadapp
-    public void createDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        View alertLayout = inflater.inflate(R.layout.dialog_loadingup, null);
-        final android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(this);
-        alert.setView(alertLayout);
-        alert.setCancelable(false);
-        final AlertDialog dialog = alert.create();
-        dialog.show();
-        final Handler handler  = new Handler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                if (dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            }
-        };
-
-        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                handler.removeCallbacks(runnable);
-            }
-        });
-
-        handler.postDelayed(runnable, 3500);
-    }
 }

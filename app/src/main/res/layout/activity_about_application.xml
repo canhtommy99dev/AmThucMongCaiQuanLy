@@ -14,8 +14,8 @@
         <ImageView
             android:layout_margin="15dp"
             android:id="@+id/btnBack12ddd"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:src="@drawable/ic_arrow_back_black_24dp"/>
 
         <TextView
@@ -29,10 +29,10 @@
 
     </RelativeLayout>
     <ImageView
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="200sp"
         android:layout_alignParentTop="true"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:src="@drawable/avatarmy">
@@ -44,9 +44,9 @@
         android:layout_centerVertical="true"
         android:text="Create By:Canhtommy99"
         android:gravity="center"
-        android:textSize="20dp"></TextView>
+        android:textSize="20sp"></TextView>
     <TextView
-        android:layout_marginTop="405dp"
+        android:layout_marginTop="405sp"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/app_bar_layout"
         android:fitsSystemWindows="true"
-        app:elevation="0dp"
+        app:elevation="0sp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
@@ -26,7 +26,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="350sp"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 android:id="@+id/iv_detail"
@@ -55,13 +55,4 @@
         <include layout="@layout/content_collapsible_toolbar"/>
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_anchor="@id/app_bar_layout"
-        app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@android:drawable/ic_menu_edit"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

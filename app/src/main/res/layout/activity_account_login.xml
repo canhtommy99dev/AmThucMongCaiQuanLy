@@ -15,27 +15,27 @@
 
         <ImageView
             android:id="@+id/imgBack2111"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
 
         <TextView
             android:id="@+id/txtBanDo111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="4sp"
             android:layout_centerInParent="true"
             android:layout_alignParentTop="true"
             android:text="Account"
             android:textColor="#fff"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <ImageView
             android:layout_alignParentRight="true"
             android:layout_marginLeft="150dp"
             android:id="@+id/signout11"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:src="@drawable/ic_exit_to_app_black_24dp" />
     </RelativeLayout>
     <LinearLayout
@@ -52,9 +52,9 @@
         android:textSize="20sp"/>
 
         <EditText
-            android:layout_margin="15dp"
-            android:paddingLeft="10dp"
-            android:hint="Password"
+            android:layout_margin="15sp"
+            android:paddingLeft="10sp"
+            android:hint="Password Mới"
             android:id="@+id/edtChangePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,12 +62,12 @@
             android:inputType="textPassword" />
 
         <Button
-            android:layout_margin="15dp"
+            android:layout_margin="15sp"
             android:textColor="#fff"
             android:background="@drawable/round"
             android:id="@+id/btnChangePassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Thay Đổi Mật Khẩu" />
     </LinearLayout>
 </LinearLayout>

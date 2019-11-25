@@ -71,10 +71,12 @@ public class DangNhapFB extends AppCompatActivity {
                 final String password = passE.getText().toString();
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(DangNhapFB.this, "Yêu cầu nhập account email đã đăng ký ...!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(DangNhapFB.this, "Yêu cầu nhập password đã đăng ký...!!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
                     return;
                 }
                 firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(DangNhapFB.this, new OnCompleteListener<AuthResult>() {
@@ -105,8 +107,6 @@ public class DangNhapFB extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         }
-                        emailE.getText().clear();
-                        passE.getText().clear();
                     }
                 });
             }

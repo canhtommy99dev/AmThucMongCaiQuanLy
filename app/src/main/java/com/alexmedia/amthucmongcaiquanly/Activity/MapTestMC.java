@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alexmedia.amthucmongcaiquanly.Adapter.AdapterMap;
 import com.alexmedia.amthucmongcaiquanly.Model.DangBaiModel;
 import com.alexmedia.amthucmongcaiquanly.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,6 +41,7 @@ public class MapTestMC extends FragmentActivity implements OnMapReadyCallback, L
     Marker marker;
     ImageView imgBack,imgHDSD;
     Button btnClickBack;
+    MarkerOptions markerOptions;
     private final static int MY_PERMISSIONS_FINE_LOCATION = 101;
 
     @Override
@@ -84,6 +86,7 @@ public class MapTestMC extends FragmentActivity implements OnMapReadyCallback, L
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.setOnMarkerClickListener(this);
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
         dataCuaHang.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -91,9 +94,18 @@ public class MapTestMC extends FragmentActivity implements OnMapReadyCallback, L
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot da:dataSnapshot.getChildren()){
                     DangBaiModel dangBaiModel = da.getValue(DangBaiModel.class);
-                    LatLng latLng = new LatLng(dangBaiModel.getLatitude(),dangBaiModel.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(dangBaiModel.getTench() + " -- " +dangBaiModel.getDiachi()))
-                    .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+//                    LatLng latLng = new LatLng(dangBaiModel.getLatitude(),dangBaiModel.getLongitude());
+//                    mMap.addMarker(new MarkerOptions().position(latLng).title(dangBaiModel.getTench() + "--" + dangBaiModel.getDiachi()))
+//                            .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+//                    AdapterMap adapterMap = new AdapterMap(MapTestMC.this);
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(dangBaiModel.getLatitude(),dangBaiModel.getLongitude()))
+                            .title(dangBaiModel.getTench())
+                            .snippet(dangBaiModel.getDiachi())
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    AdapterMap adapterMap = new AdapterMap(MapTestMC.this);
+                    mMap.setInfoWindowAdapter(adapterMap);
+                    mMap.addMarker(markerOptions);
                 }
             }
 
@@ -118,6 +130,7 @@ public class MapTestMC extends FragmentActivity implements OnMapReadyCallback, L
                 requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_FINE_LOCATION);
             }
         }
+
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

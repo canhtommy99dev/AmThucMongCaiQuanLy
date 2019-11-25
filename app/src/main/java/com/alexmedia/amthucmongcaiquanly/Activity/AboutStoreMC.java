@@ -60,7 +60,6 @@ public class AboutStoreMC extends AppCompatActivity {
     Context context;
     Intent intent;
     DatabaseReference databaseReference;
-    FloatingActionButton fab;
     StorageReference anhmc;
     private Uri imgUri;
     private static final int CHOOSE_IMAGE = 1;
@@ -112,13 +111,6 @@ public class AboutStoreMC extends AppCompatActivity {
         facebook1 = findViewById(R.id.txfFacebook);
         tinhtrangship1 = findViewById(R.id.txtTinhTrangShipDo);
         diachifix = findViewById(R.id.txtDiachi1);
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(AboutStoreMC.this, "ccc", Toast.LENGTH_SHORT).show();
-            }
-        });
         dialog.setTitle("Xin vui lòng chờ upload");
         setTitle("Thông tin cửa hàng");
         diachifix.setText("Địa Chỉ" + diachi);

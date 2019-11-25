@@ -5,19 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="1dp">
     <androidx.cardview.widget.CardView
-        android:layout_width="240dp"
-        android:layout_height="240dp"
+        android:layout_width="240sp"
+        android:layout_height="240sp"
         android:layout_centerInParent="true"
-        app:cardMaxElevation="2dp"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="1dp">
+        app:cardMaxElevation="2sp"
+        app:cardCornerRadius="4sp"
+        app:cardElevation="1sp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
                 android:src="@drawable/ic_image_black_24dp"
-                android:layout_width="240dp"
-                android:layout_height="240dp"
+                android:layout_width="240sp"
+                android:layout_height="240sp"
                 android:id="@+id/imageInfo"
                 android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"/>

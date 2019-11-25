@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,18 +9,18 @@
     tools:context=".DangNhapFB">
 
     <ImageView
+        android:layout_margin="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:id="@+id/imgLogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="85dp"
-        app:layout_constraintBottom_toTopOf="@+id/edtEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/iconcreate" />
 
     <EditText
+        android:layout_marginTop="250sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:id="@+id/edtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,65 +29,57 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingLeft="20dp"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#fff" />
 
     <EditText
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="300sp"
         android:id="@+id/edtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="46dp"
         android:background="@drawable/edttext"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:paddingLeft="20dp"
-        android:textColor="#fff"
-        app:layout_constraintStart_toStartOf="@+id/edtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+        android:textColor="#fff" />
 
     <ImageView
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="380sp"
         android:id="@+id/imgClickLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:src="@drawable/btnlogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chbxmmm1" />
+        android:src="@drawable/btnlogin" />
 
     <TextView
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="440sp"
         android:id="@+id/txtClickReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:text="Tôi chưa có tài khoản đăng nhập"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgClickLogin" />
+        android:text="Tôi chưa có tài khoản đăng nhập" />
 
     <TextView
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="470sp"
         android:id="@+id/txtForget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="47dp"
-        android:text="Tôi quên mật khẩu rồi"
-        app:layout_constraintStart_toStartOf="@+id/txtClickReg"
-        app:layout_constraintTop_toBottomOf="@+id/txtClickReg" />
+        android:text="Tôi quên mật khẩu rồi" />
 
     <CheckBox
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="340sp"
         android:id="@+id/chbxmmm1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
         android:text="Remember"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="@+id/imgClickLogin"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        android:textColor="#fff" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
