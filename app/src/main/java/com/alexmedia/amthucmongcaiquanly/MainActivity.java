@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     ListView lvDsCuaHang;
     List<DangBaiModel> baiModelList;
     FirebaseAuth auth;
-    DatabaseReference databaseReference,imagecuahang;
+    DatabaseReference databaseReference,imagecuahang,datacomment;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     AdapterCuaHang adapterCuaHang;
     ProgressBar loadingimage;
@@ -338,9 +338,11 @@ public class MainActivity extends AppCompatActivity {
         //getting the specified artist reference
         databaseReference = FirebaseDatabase.getInstance().getReference("CuaHang/DanhSachCuaHang").child(id);
         imagecuahang = FirebaseDatabase.getInstance().getReference("ImageAlbum").child(id);
+        datacomment = FirebaseDatabase.getInstance().getReference("CommentBaiViet").child(id);
         //removing artist
         databaseReference.removeValue();
         imagecuahang.removeValue();
+        datacomment.removeValue();
         Toast.makeText(getApplicationContext(), "Đã xóa thành công", Toast.LENGTH_LONG).show();
         return true;
     }
